@@ -22,6 +22,7 @@ export default function klona(x) {
 	if (str === '[object Set]') return new Set(x);
 	if (str === '[object Date]') return new Date(+x);
 	if (str === '[object Map]') return new Map(x);
+	if (str === '[object Blob]') return x.slice();
 
 	if (str === '[object RegExp]') {
 		tmp = new RegExp(x.source, x.flags);
@@ -31,6 +32,10 @@ export default function klona(x) {
 
 	if (str.slice(-6) === 'Array]') {
 		return new x.constructor(x);
+	}
+
+	if (str.slice(-7) === 'Buffer]') {
+		return x.slice();
 	}
 
 	return x;
